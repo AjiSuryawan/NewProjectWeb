@@ -9,9 +9,24 @@
 </div>
 <div class="card-body text-center">
  <h3>QR Code <br> {{$qrcode->nama_barang}}</h3>
+ <div id="example">
   <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')
                         ->size(150)->errorCorrection('H')
                         ->generate($qrcode->id_barang)) !!} ">
+                        </div> 
+                        <br>
+                        
+<input type="button" value="Print" class="btn btn-primary" onclick="printDiv(example);"/>
 </div>
+
+<script>
+function printDiv(example) {
+      var printContents = document.getElementById("example").innerHTML;    
+   var originalContents = document.body.innerHTML;      
+   document.body.innerHTML = printContents;     
+   window.print();     
+   document.body.innerHTML = originalContents;
+   }
+</script>
 
 @endsection
